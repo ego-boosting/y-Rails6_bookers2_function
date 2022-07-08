@@ -8,8 +8,26 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
+   <tr>
+    <th>follows</th>
+    <th><%= link_to user.followings.count, user_followings_path(user.id) %></th>
+  </tr>
+   <tr>
+    <th>followers</th>
+    <th><%= link_to user.followers.count, user_followers_path(user.id) %></th>
+  </tr>
 </table>
-　
+
+<div class="mb-3">
+  <% if current_user.following?(user) %>
+    <%= link_to "unfollow", user_relationships_path(user.id), class: "btn btn-info", method: :delete %>
+  <% else %>
+    <%= link_to "follow", user_relationships_path(user.id), class: "btn btn-success", method: :post %>
+  <% end %>
+  <% if current_user != user %>
+    <%= link_to 'Begin Chat', chat_path(user.id), class: "btn btn-outline-dark" %>
+  <% end %>
+</div>
 <div class='row'>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
     <i class="fas fa-user-cog"></i>
