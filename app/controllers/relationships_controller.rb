@@ -5,6 +5,10 @@ class RelationshipsController < ApplicationController
     current_user.follow(params[:user_id])
     redirect_to request.referer
   end
+
+  # def create
+  #   current_user.relationships.create(followed_id: user_id)
+  # end
   # フォロー外すとき
   def destroy
     current_user.unfollow(params[:user_id])

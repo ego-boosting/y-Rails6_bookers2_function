@@ -23,12 +23,14 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
     # フォローしたときの処理
+  # current_user（インスタンス）はmodel内で省略できる
   def follow(user_id)
-    relationships.create(followed_id: user_id)
+    self.relationships.create(followed_id: user_id)
   end
   # フォローを外すときの処理
   def unfollow(user_id)
-    relationships.find_by(followed_id: user_id).destroy
+    # selfに紐ずくrelationships自分がフォローしている人たち
+    self.relationships.find_by(followed_id: user_id).destroy
   end
   # フォローしているか判定
   def following?(user)
@@ -37,5 +39,19 @@ class User < ApplicationRecord
 
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
+  end
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @user = User.where("name LIKE?", "#{word}")
+    elsif search == "forward_match"
+      @user = User.where("name LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @user = User.where("name LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @user = User.where("name LIKE?","%#{word}%")
+    else
+      @user = User.all
+    end
   end
 end
