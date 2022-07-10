@@ -10,11 +10,11 @@
   </tr>
    <tr>
     <th>follows</th>
-    <th><%= link_to user.followings.count, user_followings_path(user.id) %></th>
+    <th><%= link_to user.followings.count, user_followings_path(user.id), class: "btn btn-light" %></th>
   </tr>
    <tr>
     <th>followers</th>
-    <th><%= link_to user.followers.count, user_followers_path(user.id) %></th>
+    <th><%= link_to user.followers.count, user_followers_path(user.id), class: "btn btn-light" %></th>
   </tr>
 </table>
 
@@ -37,9 +37,9 @@
     <% end %>
   <% else %>
     <% if current_user.following?(user) %>
-      <%= link_to "unfollow", user_relationships_path(user.id), class: "btn btn-info", method: :delete %>
+      <%= link_to "unfollow", user_relationships_path(user.id), class: "btn btn-outline-danger", method: :delete %>
     <% else %>
-      <%= link_to "follow", user_relationships_path(user.id), class: "btn btn-success", method: :post %>
+      <%= link_to "follow", user_relationships_path(user.id), class: "btn btn-info", method: :post %>
     <% end %>
      <%= link_to 'Begin Chat', chat_path(user.id), class: "btn btn-outline-dark ml-2" %>
   <% end %>
