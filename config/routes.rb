@@ -20,7 +20,4 @@ Rails.application.routes.draw do
     resources :groups do
       get "join" => "groups#join"
     end
-    resources :users, only: [:index, :show, :edit, :update] do
-    get "search", to: "users#search"
-  end
 end
