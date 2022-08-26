@@ -18,20 +18,8 @@
   </tr>
 </table>
 
-<!--<div class="mb-3">-->
-  <%# if current_user != user %>
-    <%#= link_to "unfollow", user_relationships_path(user.id), class: "btn btn-info", method: :delete %>
-  <%# else %>
-    <%#= link_to "follow", user_relationships_path(user.id), class: "btn btn-success", method: :post %>
-  <%# end %>
-  <%# if current_user != user %>
-    <%#= link_to 'Begin Chat', chat_path(user.id), class: "btn btn-outline-dark" %>
-  <%# end %>
-
-<!--</div>-->
-
 <div class='row'>
-  <% if current_user == user %>
+  <% if current_user == user && user.name != "guestuser"%>
     <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
       <i class="fas fa-user-cog"></i>
     <% end %>
@@ -44,3 +32,4 @@
      <%= link_to 'Begin Chat', chat_path(user.id), class: "btn btn-outline-dark ml-2" %>
   <% end %>
 </div>
+

@@ -56,4 +56,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'bulma-rails'
 gem 'pry-byebug'
-gem 'kaminari','~> 1.2.1'
+gem 'kaminari', '~> 1.2.1'
+gem 'rubocop-airbnb'

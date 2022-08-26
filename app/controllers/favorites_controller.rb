@@ -17,6 +17,5 @@ class FavoritesController < ApplicationController
 
   def book_params
     @book = Book.find(params[:book_id])
-
   end
 end

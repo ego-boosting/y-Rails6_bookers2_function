@@ -9,7 +9,7 @@ class Group < ApplicationRecord
 
   # idk
   def get_image
-    (image.attached?) ? image : 'no_image.jpg'
+    image.attached? ? image : 'no_image.jpg'
   end
 
   def is_owned_by?(user)
@@ -19,5 +19,4 @@ class Group < ApplicationRecord
   def includesUser?(user)
     group_users.exists?(user_id: user.id)
   end
-
 end

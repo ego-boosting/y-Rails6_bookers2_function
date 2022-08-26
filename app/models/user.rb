@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_one_attached :profile_image
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
-  validates :introduction, length: {maximum: 50 }
+  validates :introduction, length: { maximum: 50 }
 
   # DM機能
   has_many :user_rooms, dependent: :destroy
@@ -27,36 +27,46 @@ class User < ApplicationRecord
   has_many :followings, through: :relationships, source: :followed
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
-    # フォローしたときの処理
+  # フォローしたときの処理
   # current_user（インスタンス）はmodel内で省略できる
   def follow(user_id)
-    self.relationships.create(followed_id: user_id)
+    relationships.create(followed_id: user_id)
   end
+
   # フォローを外すときの処理
   def unfollow(user_id)
     # selfに紐ずくrelationships自分がフォローしている人たち
-    self.relationships.find_by(followed_id: user_id).destroy
+    relationships.find_by(followed_id: user_id).destroy
   end
+
   # フォローしているか判定
   def following?(user)
     followings.include?(user)
   end
 
   def get_profile_image
-    (profile_image.attached?) ? profile_image : 'no_image.jpg'
+    profile_image.attached? ? profile_image : 'no_image.jpg'
   end
+
   # 検索方法分岐
   def self.looks(search, word)
     if search == "perfect_match"
       @user = User.where("name LIKE?", "#{word}")
     elsif search == "forward_match"
-      @user = User.where("name LIKE?","#{word}%")
+      @user = User.where("name LIKE?", "#{word}%")
     elsif search == "backward_match"
-      @user = User.where("name LIKE?","%#{word}")
+      @user = User.where("name LIKE?", "%#{word}")
     elsif search == "partial_match"
-      @user = User.where("name LIKE?","%#{word}%")
+      @user = User.where("name LIKE?", "%#{word}%")
     else
       @user = User.all
+    end
+  end
+
+  def self.guest
+    find_or_create_by!(name: 'guestuser', email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
     end
   end
 end

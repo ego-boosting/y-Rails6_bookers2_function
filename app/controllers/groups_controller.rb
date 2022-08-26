@@ -12,12 +12,11 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
-  def join #追記！
+  def join # 追記！
     @group = Group.find(params[:group_id])
     @group.users << current_user
     redirect_to  groups_path
   end
-
 
   def new
     @group = Group.new
@@ -37,6 +36,7 @@ class GroupsController < ApplicationController
   # ストロングパラメーター内に記述
   def edit
   end
+
   # ストロングパラメーター内に記述
   def update
     if @group.update(group_params)
