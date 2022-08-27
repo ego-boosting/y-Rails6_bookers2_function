@@ -12,32 +12,32 @@
       </div>
     </div>
 
-
-<table class="table">
-   <thead>
-    <tr>
-     <th>６日前</th>
-     <th>5日前</th>
-     <th>4日前</th>
-     <th>3日前</th>
-     <th>２日前</th>
-     <th>昨日</th>
-     <th>今日</th>
-    </tr>
-   </thead>
-   <tbody>
-    <tr>
-     <th><%= @book_count[0] %></th>
-     <th><%= @book_count[1] %></th>
-     <th><%= @book_count[2] %></th>
-     <th><%= @book_count[3] %></th>
-     <th><%= @book_count[4] %></th>
-     <th><%= @book_count[5] %></th>
-     <th><%= @book_count[6] %></th>
-    </tr>
-   </tbody>
-  </table>
-
+  <div class="table table-responsive">
+    <table class="table">
+     <thead>
+      <tr>
+       <th>６日前</th>
+       <th>5日前</th>
+       <th>4日前</th>
+       <th>3日前</th>
+       <th>２日前</th>
+       <th>昨日</th>
+       <th>今日</th>
+      </tr>
+     </thead>
+     <tbody>
+      <tr>
+       <th><%= @book_count[0] %></th>
+       <th><%= @book_count[1] %></th>
+       <th><%= @book_count[2] %></th>
+       <th><%= @book_count[3] %></th>
+       <th><%= @book_count[4] %></th>
+       <th><%= @book_count[5] %></th>
+       <th><%= @book_count[6] %></th>
+      </tr>
+     </tbody>
+    </table>
+  </div>
 
 
 
@@ -77,15 +77,16 @@
               datasets: [
                 {
                   label: 'My books data',
-                  backgroundColor: 'rgb(255, 99, 132, 0.2)',
-                  borderColor: 'rgb(255, 99, 132)',
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192)',
                   data: countData,
                   fill: true
                 },
                 {
-                  label: 'Line Dataset',
+                  label: 'bar Dataset',
                   data: countData,
-                  type: 'bar'
+                  type: 'bar',
+                  backgroundColor: 'rgba(153, 102, 255, 0.2)',
                 }
               ]
             };
