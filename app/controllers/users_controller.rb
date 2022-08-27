@@ -8,6 +8,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+
+    @book_count = []
+    # 6.downto(0)は、0..6の逆
+    for num in 6.downto(0) do
+    # append or << で要素の追加
+    # 0番目に6日前の投稿数が入る
+      @book_count.append( Book.book_created(num, current_user))
+    end
   end
 
   def index

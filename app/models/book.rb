@@ -22,4 +22,14 @@ class Book < ApplicationRecord
       @book = Book.all
     end
   end
+
+
+  # 7日間分の投稿
+
+  def self.book_created(num, current_user)
+    target = Time.current - num.day
+    self.where(user_id: current_user.id, created_at: target.at_beginning_of_day...target.at_end_of_day).count
+  end
 end
+
+

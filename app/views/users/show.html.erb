@@ -1,14 +1,120 @@
-<div class='container px-5 px-sm-0'>
-  <div class='row'>
-    <div class='col-md-3'>
-      <h2>User info</h2>
-      <%= render 'info', user: @user %>
-      <h2 class="mt-3">New book</h2>
-      <%= render 'books/form', book: @book %>
+  <div class='container px-5 px-sm-0'>
+    <div class='row'>
+      <div class='col-md-3'>
+        <h2>User info</h2>
+        <%= render 'info', user: @user %>
+        <h2 class="mt-3">New book</h2>
+        <%= render 'books/form', book: @book %>
+      </div>
+      <div class='col-md-8 offset-md-1'>
+        <h2>Books</h2>
+        <%= render 'books/index',books: @books %>
+      </div>
     </div>
-    <div class='col-md-8 offset-md-1'>
-      <h2>Books</h2>
-      <%= render 'books/index',books: @books %>
+
+
+<table class="table">
+   <thead>
+    <tr>
+     <th>６日前</th>
+     <th>5日前</th>
+     <th>4日前</th>
+     <th>3日前</th>
+     <th>２日前</th>
+     <th>昨日</th>
+     <th>今日</th>
+    </tr>
+   </thead>
+   <tbody>
+    <tr>
+     <th><%= @book_count[0] %></th>
+     <th><%= @book_count[1] %></th>
+     <th><%= @book_count[2] %></th>
+     <th><%= @book_count[3] %></th>
+     <th><%= @book_count[4] %></th>
+     <th><%= @book_count[5] %></th>
+     <th><%= @book_count[6] %></th>
+    </tr>
+   </tbody>
+  </table>
+
+
+
+
+
+    <div>
+      <% @book_count.each_with_index do |count, index| %>
+      <%= hidden_field_tag "#{index}_ago", count %>
+      <% end %>
     </div>
+    <canvas id="myChart"></canvas>
+
+        <script>
+        <%# new Array() 配列を初期化する　()関数を呼び出す %>
+          let i, tmp, countData = new Array();
+        <%# for文 %>
+          for(i = 0; i < 7; i++) {
+            tmp = document.getElementById(i + '_ago').value;
+            countData.push(tmp)
+          }
+          <%# countDataの中のmaxを取得する%>
+
+          $(document).on('turbolinks:load', function () {
+          const maxCount = Math.max.apply(null, countData);
+
+            const labels = [
+              '6日前',
+              '5日前',
+              '4日前',
+              '3日前',
+              '2日前',
+              '1日前',
+              '今日',
+            ];
+
+            const data = {
+              labels: labels,
+              datasets: [
+                {
+                  label: 'My books data',
+                  backgroundColor: 'rgb(255, 99, 132, 0.2)',
+                  borderColor: 'rgb(255, 99, 132)',
+                  data: countData,
+                  fill: true
+                },
+                {
+                  label: 'Line Dataset',
+                  data: countData,
+                  type: 'bar'
+                }
+              ]
+            };
+
+            const config = {
+              type: 'line',
+              data: data,
+              options: {
+                scales: {
+                  y: {
+                    title: {
+                      display: true,
+                      text: 'Value'
+                    },
+                    min: 0,
+                    max: Math.max.apply(null, [10, maxCount]),
+                    ticks: {
+                      // forces step size to be 50 units
+                      stepSize: 1
+                    }
+                  }
+                }
+              }
+            };
+
+            const myChart = new Chart(
+              document.getElementById('myChart'),
+              config
+            );
+          });
+        </script>
   </div>
-</div>
