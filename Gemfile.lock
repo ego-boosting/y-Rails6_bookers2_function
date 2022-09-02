@@ -67,6 +67,9 @@ GEM
     bindex (0.8.1)
     bootsnap (1.7.6)
       msgpack (~> 1.0)
+    bootstrap5-kaminari-views (0.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.4)
     bulma-rails (0.9.3)
       sassc (~> 2.0)
@@ -287,6 +290,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.4)
+  bootstrap5-kaminari-views (~> 0.0.1)
   bulma-rails
   byebug
   capybara (>= 2.15)

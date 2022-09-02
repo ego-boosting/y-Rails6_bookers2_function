@@ -31,5 +31,3 @@ class Book < ApplicationRecord
     self.where(user_id: current_user.id, created_at: target.at_beginning_of_day...target.at_end_of_day).count
   end
 end
-
-

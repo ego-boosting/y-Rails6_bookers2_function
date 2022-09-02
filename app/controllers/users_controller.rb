@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     for num in 6.downto(0) do
     # append or << で要素の追加
     # 0番目に6日前の投稿数が入る
-      @book_count.append( Book.book_created(num, current_user))
+      @book_count.append(Book.book_created(num, current_user))
     end
   end
 

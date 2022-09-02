@@ -5,6 +5,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -12,12 +13,10 @@
   <body>
     <%= render 'layouts/header' %>
       <main>
-        <div class="container">
-          <div class="row justify-content-center">
-            <%= render 'searches/search' %>
-          </div>
-        </div>
         <p id="notice"><%= notice %></p>
+        <div>
+          <%= render 'searches/search' %>
+        </div>
         <%=yield %>
       </main>
     <%= render 'layouts/footer' %>

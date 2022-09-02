@@ -14,16 +14,34 @@
  *= require_self
  */
 
- @import "bulma";
-
- bo {
-   min-height: 100vh;
-   color: white;
-   background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
-   background-blend-mode: multiply,multiply;
-   font-family: sans-serif;
+ header{
+    width: 100%; /* 幅いっぱいを指定 */
+    position: fixed; /* ウィンドウを基準に画面に固定 */
+    top: 0; /* 上下の固定位置を上から0pxにする */
+    left: 0; /* 左右の固定位置を左から0pxにする */
+    z-index: 1000;
  }
 
- .pagination {
-  justify-content: center;
-}
+ main {
+   background-color: 	#F5FFFA!important;
+ }
+
+// .pagination {
+//   justify-content: center;
+// }
+
+//   .pagination li a {
+//     color: #75B5A1;
+//     background-color: #fff;
+//     border-radius: 5px;
+//   }
+
+//   .page-item.active .page-link {
+//     color: #75B5A1;
+//     background-color: #fff;
+//   }
+
+  .scroll{
+    height: 600px;
+    overflow: auto;
+  }
